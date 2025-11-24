@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\extre\\Documents\\Projeto_2D\\Fox Adventure\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7DAC3245-D9E7-B48C-CE03-E8DE88A67228}|Assembly-CSharp.csproj|c:\\users\\extre\\documents\\projeto_2d\\fox adventure\\assets\\gamefolder\\scripts\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DAC3245-D9E7-B48C-CE03-E8DE88A67228}|Assembly-CSharp.csproj|solutionrelative:assets\\gamefolder\\scripts\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\extre\\Documents\\Projeto_2D\\Fox Adventure\\Assets\\GameFolder\\Scripts\\Player\\Player.cs",
+              "RelativeDocumentMoniker": "Assets\\GameFolder\\Scripts\\Player\\Player.cs",
+              "ToolTip": "C:\\Users\\extre\\Documents\\Projeto_2D\\Fox Adventure\\Assets\\GameFolder\\Scripts\\Player\\Player.cs",
+              "RelativeToolTip": "Assets\\GameFolder\\Scripts\\Player\\Player.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-13T20:24:15.998Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
