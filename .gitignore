@@ -1,0 +1,13 @@
+# Ignorar arquivos temporários, cache e bibliotecas geradas pelo Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+Packages/
+*.csproj
+*.unityproj
+*.sln
+*.userprefs
+*.meta.bak
