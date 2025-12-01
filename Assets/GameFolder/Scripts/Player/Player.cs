@@ -61,25 +61,27 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!onSliding)
-        Move();
+        if (!onSliding)
+            Move();
     }
 
     private void Move()
     {
-        if(onSlope && !isJump)
+        if (onSlope && !isJump)
         {
             //movimento com slope/rampa
             rb2d.gravityScale = 20f;
-            if(rb2d.velocity.y < -2f)
+            if (rb2d.velocity.y < -2f)
             {
                 rb2d.velocity = new Vector2(moveInput * moveSpeed, -9f);
-            }else{
+            }
+            else
+            {
                 rb2d.velocity = new Vector2(moveInput * moveSpeed, rb2d.velocity.y);
             }
         }
         else
-        {   
+        {
             rb2d.gravityScale = 3f;
             rb2d.velocity = new Vector2(moveInput * moveSpeed, rb2d.velocity.y);
         }
@@ -97,12 +99,14 @@ public class Player : MonoBehaviour
         }
 
         // pulo normal
-        if (Input.GetKeyDown(KeyCode.Space) && onGround){
+        if (Input.GetKeyDown(KeyCode.Space) && onGround)
+        {
             Jump();
         }
 
         // puo na parede
-        if (Input.GetKeyDown(KeyCode.Space) && isSliding){
+        if (Input.GetKeyDown(KeyCode.Space) && isSliding)
+        {
             rb2d.velocity = Vector2.zero;
             rb2d.velocity = new Vector2(wallJumpForce * -moveInput, wallJumpForce);
             onSliding = true;
@@ -110,7 +114,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator jumpSlide(){
+    IEnumerator jumpSlide()
+    {
         transform.localScale = new Vector3(-moveInput, 1f, 1f);
         yield return new WaitForSeconds(0.3f);
         onSliding = false;
@@ -121,7 +126,8 @@ public class Player : MonoBehaviour
         colliders_1 = Physics2D.OverlapCircleAll(groundCheck[0].position, groundCheckRadius, groundMask);
         colliders_2 = Physics2D.OverlapCircleAll(groundCheck[1].position, groundCheckRadius, groundMask);
 
-        if(onGround && !wasOnGround){isJump = false;};
+        if (onGround && !wasOnGround) { isJump = false; }
+        ;
 
         wasOnGround = onGround;
 
@@ -135,64 +141,70 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Jump(){
+    private void Jump()
+    {
         isJump = true;
         rb2d.gravityScale = 3f;
         rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
     }
 
     private void Slopes()
-  {
+    {
         RaycastHit2D hitSlope = Physics2D.Raycast(transform.position, Vector2.down, slopeCheckDistance, groundMask);
         Debug.DrawRay(transform.position, Vector2.down * slopeCheckDistance, Color.red);
 
-    if (hitSlope)
-    {
-        slopeAngle = Vector2.Angle(hitSlope.normal, Vector2.up); //pega o angulo do slope
-
-        print(slopeAngle);
-
-        onSlope = slopeAngle != 0;
-
-        if (onSlope && moveInput == 0)
+        if (hitSlope)
         {
-            rb2d.sharedMaterial = friction;
+            slopeAngle = Vector2.Angle(hitSlope.normal, Vector2.up); //pega o angulo do slope
+
+            print(slopeAngle);
+
+            onSlope = slopeAngle != 0;
+
+            if (onSlope && moveInput == 0)
+            {
+                rb2d.sharedMaterial = friction;
+            }
+            else
+            {
+                rb2d.sharedMaterial = noFriction;
+            }
+        }
+    }
+
+    private void Slide()
+    {
+        isColliderWall = Physics2D.Raycast(wallCheck.position, wallCheck.TransformDirection(Vector2.right), wallCheckDistance, groundMask);
+        Debug.DrawRay(wallCheck.position, wallCheck.TransformDirection(Vector2.right) * wallCheckDistance, Color.red);
+        if (isColliderWall && !onGround && rb2d.velocity.y < 0 && moveInput != 0)
+        {
+            isSliding = true;
         }
         else
         {
-            rb2d.sharedMaterial = noFriction;
-        }
-    }
-  }
-
-  private void Slide()
-  {
-        isColliderWall = Physics2D.Raycast(wallCheck.position, wallCheck.TransformDirection(Vector2.right), wallCheckDistance, groundMask);
-        Debug.DrawRay(wallCheck.position, wallCheck.TransformDirection(Vector2.right) * wallCheckDistance, Color.red);
-        if(isColliderWall && !onGround && rb2d.velocity.y < 0 && moveInput != 0){
-            isSliding = true;
-        }else{
             isSliding = false;
         }
 
         // faz slide na parede caindo
-        if(isSliding && rb2d.velocity.y < -wallSlideSpeed){
+        if (isSliding && rb2d.velocity.y < -wallSlideSpeed)
+        {
             rb2d.velocity = new Vector2(rb2d.velocity.x, -wallSlideSpeed);
         }
-  }
+    }
 
     private void Animations()
-  {
-    playerAnim.SetFloat("SpeedX", Mathf.Abs(moveInput));
-    playerAnim.SetFloat("SpeedY", rb2d.velocity.y);
-    playerAnim.SetBool("onGround", onGround);
-    playerAnim.SetBool("isSliding", isSliding);
-  }
+    {
+        playerAnim.SetFloat("SpeedX", Mathf.Abs(moveInput));
+        playerAnim.SetFloat("SpeedY", rb2d.velocity.y);
+        playerAnim.SetBool("onGround", onGround);
+        playerAnim.SetBool("isSliding", isSliding);
+    }
 
-  private void OnCollisionEnter2D(Collision2D other)
-  {
-        if(other.gameObject.layer == 8){
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == 8)
+        {
             GameController.instance.RestartGame();
         }
-  }
+    }
 }
